@@ -19,4 +19,8 @@ public interface CheckListService extends CRUDService<CheckListBean, CheckList> 
     List<CheckListClientHistoryBean> getClientHistory(	Integer year,
 											    		Integer month,
 														String status);
+    
+    String changeOrderStatus(long orderId);
+    
 }
+	

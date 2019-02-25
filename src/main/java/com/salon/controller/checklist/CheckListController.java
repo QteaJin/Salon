@@ -69,5 +69,9 @@ public class CheckListController {
     	
     }
     
+    @RequestMapping(value = "cancel/{id}", method = RequestMethod.GET)
+    public String cancelOrderById(@PathVariable("id") long id) {
+        return checkListService.changeOrderStatus(id);
+    }
 
 }
