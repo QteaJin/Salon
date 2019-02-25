@@ -156,7 +156,7 @@ public class CheckListServiceImpl implements CheckListService {
     
     @Override
     public List<CheckListClientHistoryBean> getClientHistory( Integer year, Integer month, String status) {
-    	RecieveUserInfo userInfo = new RecieveUserInfo();   //Long clientId,
+    	RecieveUserInfo userInfo = new RecieveUserInfo();   //Long clientId - authorization,
     	Long clientId = userInfo.getUserId();
     	
     	List<CheckListClientHistoryBean> clientHistoryBeans = new ArrayList<CheckListClientHistoryBean>();
@@ -214,6 +214,18 @@ public class CheckListServiceImpl implements CheckListService {
     	
     	return clientHistoryBeans;
     }
+    @Override
+	public String changeOrderStatus(long orderId) {
+    	Optional<CheckList> order = checkListDAO.findById(orderId);
+    	CheckList checkList = order.get();
+    	if(checkList.getStatus().equals(EnumStatusCheckList.NEW)) {
+    		checkList.setStatus(EnumStatusCheckList.CANCELED);
+    		update(toBean(checkList));
+    		return "Done";
+    	}
+    		
+		return "Fail";
+	}
 
 
     @Override
@@ -256,4 +268,6 @@ public class CheckListServiceImpl implements CheckListService {
         }
         return beans;
     }
+
+	
 }
