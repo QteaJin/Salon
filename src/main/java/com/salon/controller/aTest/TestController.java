@@ -20,6 +20,7 @@ public class TestController {
 		System.err.println(auth.getPrincipal().toString());
 		System.err.println(auth.getName());
 		System.err.println(auth.getCredentials());
+		System.out.println();
 		
 		
 		return auth.getPrincipal().toString();
